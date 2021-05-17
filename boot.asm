@@ -13,9 +13,11 @@ mov [BOOT_DISK], dl ; lower data register
 mov bx, TestString
 call PrintString ; calls the address of printstring
 
+; Reading from extendedDisk
 call ReadDisk
 
-jmp $
+
+jmp PROGRAM_SPACE
 
 %include 'print.asm'
 %include 'diskRead.asm'
