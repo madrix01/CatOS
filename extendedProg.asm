@@ -5,6 +5,7 @@ jmp EnterProtectedMode
 %include "gdt.asm"
 %include "print.asm"
 
+
 EnterProtectedMode:
     call EnableA20
     cli ; disables interrupts
@@ -22,6 +23,9 @@ EnableA20:
 
 [bits 32]
 
+%include "cpuid.asm"
+%include "simplePaging.asm"
+
 StartProtectedMode:
 
     mov ax, dataseg
@@ -32,6 +36,19 @@ StartProtectedMode:
     mov gs, ax
 
     mov [0xb8000], byte 'H'
+
+    call DetectCpuId
+    call DetectLongMode
+    call SetupIdentityPaging
+    call EditGDT
+    jmp codeseg:Start64Bit
+    ; jmp $
+[bits 64]
+Start64Bit:
+    mov edi, 0xb8000
+    mov rax, 0x1f201f201f201f20
+    mov ecx, 500
+    rep stosq
     jmp $
 
 times 2048-($-$$) db 0

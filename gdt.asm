@@ -31,7 +31,15 @@ gdt_end:
 gdt_descriptor:
     gdt_size:
         dw gdt_end - gdt_nullDesc - 1
-        dd gdt_nullDesc
+        dq gdt_nullDesc
 
 codeseg equ gdt_codeDesc - gdt_nullDesc
 dataseg equ gdt_dataDesc - gdt_nullDesc
+
+[bits 32]
+EditGDT:
+    mov [gdt_codeDesc + 6], byte 10101111b
+    mov [gdt_dataDesc + 6], byte 10101111b
+    ret
+
+[bits 16]
