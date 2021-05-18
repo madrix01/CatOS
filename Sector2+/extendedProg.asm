@@ -2,8 +2,8 @@
 
 jmp EnterProtectedMode
 
-%include "gdt.asm"
-%include "print.asm"
+%include "./Sector2+/gdt.asm"
+%include "./Sector1/print.asm"
 
 
 EnterProtectedMode:
@@ -23,8 +23,8 @@ EnableA20:
 
 [bits 32]
 
-%include "cpuid.asm"
-%include "simplePaging.asm"
+%include "./Sector2+/cpuid.asm"
+%include "./Sector2+/simplePaging.asm"
 
 StartProtectedMode:
 

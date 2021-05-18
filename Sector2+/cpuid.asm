@@ -1,5 +1,3 @@
-; %include "print.asm"
-
 DetectCpuId:
     pushfd  ;push flag onto stack
     pop eax ;pop value in eax register
@@ -31,12 +29,6 @@ ErrorDetect:
     db 'Error',0ah ,0
 
 NoLongMode:
-    ; mov bx, [ErrorDetect] 
-    ; call PrintString
-    ; jmp $
     hlt ;no longModesupport
 NoCpuId:
-    ; mov bx, [ErrorDetect] 
-    ; call PrintString
-    ; jmp $
     hlt ;no cpuid support
