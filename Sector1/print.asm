@@ -7,8 +7,8 @@ PrintString:
         int 0x10
         inc bx
         jmp .Loop
+    mov al, [bx]
     .Exit:
-    
     ret
 
 TestString:

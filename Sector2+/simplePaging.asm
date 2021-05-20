@@ -4,6 +4,8 @@ SetupIdentityPaging:
     mov edi, PageTableEntry
     mov cr3, edi
     
+    
+
     mov dword [edi], 0x2003
     add edi, 0x1000
     mov dword [edi], 0x3003
@@ -30,7 +32,7 @@ SetupIdentityPaging:
     wrmsr
 
     mov eax, cr0
-    or eax, 1 << 31
+    or eax, 1 << 31 | 1 << 8
     mov cr0, eax
     
     ret

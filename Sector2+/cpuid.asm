@@ -1,6 +1,6 @@
 DetectCpuId:
-    pushfd  ;push flag onto stack
-    pop eax ;pop value in eax register
+    pushfd              ;push flag onto stack
+    pop eax             ;pop value in eax register
     mov ecx, eax
 
     xor eax, 1 << 21    ; flip the bit  
@@ -25,10 +25,8 @@ DetectLongMode:
     jz NoLongMode
     ret
 
-ErrorDetect:
-    db 'Error',0ah ,0
 
 NoLongMode:
-    hlt ;no longModesupport
+    hlt                 ;no longModesupport
 NoCpuId:
-    hlt ;no cpuid support
+    hlt                 ;no cpuid support
