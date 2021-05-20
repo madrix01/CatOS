@@ -8,4 +8,4 @@ x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -m64 -c "./Kernel/kern
 x86_64-elf-ld -T"link.ld"
 cd ./bin
 cat boot.bin kernel.bin >> boot.bin
-qemu-system-x86_64 boot.bin
+qemu-system-x86_64 -fda boot.bin
