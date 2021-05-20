@@ -10,4 +10,4 @@ x86_64-elf-ld -o ./bin/kernel.tmp -Ttext 0x7e00 ./bin/extendedProg.o ./bin/kerne
 x86_64-elf-objcopy -O binary ./bin/kernel.tmp ./bin/kernel.bin
 cd ./bin
 cat boot.bin kernel.bin >> boot.bin
-qemu-system-x86_64 boot.bin
+qemu-system-x86_64 -fda boot.bin
