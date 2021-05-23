@@ -1,7 +1,11 @@
-; [org 0x8000]
-; [org 0x7e00]
+DiskReadSuccess: 
+    db 'Reading extendedDisk...',0ah ,0
+
+mov bx, [DiskReadSuccess]
+call PrintString
 
 jmp EnterProtectedMode
+
 
 %include "./Sector2+/gdt.asm"
 %include "./Sector1/print.asm"
@@ -28,7 +32,6 @@ EnableA20:
 %include "./Sector2+/simplePaging.asm"
 
 StartProtectedMode:
-
     mov ax, dataseg
     mov ds, ax
     mov ss, ax
