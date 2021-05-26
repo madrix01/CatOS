@@ -1,9 +1,3 @@
-DiskReadSuccess: 
-    db 'Reading extendedDisk...',0ah ,0
-
-mov bx, [DiskReadSuccess]
-call PrintString
-
 jmp EnterProtectedMode
 
 
@@ -49,6 +43,8 @@ StartProtectedMode:
 
 [bits 64]
 [extern _start]
+
+%include "./Sector2+/IDT.asm"
 
 Start64Bit:
     mov edi, 0xb8000

@@ -6,6 +6,7 @@ INPUT
 (
     ./bin/extendedProg.o
     ./bin/kernel.o
+    ./bin/Binaries.o
 )
 
 OUTPUT
@@ -21,10 +22,17 @@ SECTIONS
         *(.text)
     }
 
+    .idt BLOCK(0x1000) : ALIGN(0x1000)
+    {
+	_idt = .;
+	. = . + 0x1000;	
+    }
+
     .data : ALIGN(0x1000)
     {
         *(.data)
     }
+    
     .rodata : ALIGN(0x1000)
     {
         *(.rodata)

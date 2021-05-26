@@ -1,13 +1,14 @@
-#include "./TextPrint.cpp"
-
-const char txt[] = {'a', 'b', 'c'};
+#include "TextPrint.cpp"
+#include "colorCodes.h"
+#include "IDT.cpp"
+extern const char Logo[];
 
 extern "C" void _start() {
-    // int* ptr = (int*)0xb8000;
-    // *ptr = 0x50505050;
-    // SetCursorPos(1000);
-    SetCursorPos(PositionFromCoords(0, 0));
-    PrintText("Hello world");
-    // TestPrint();
+    InitializeIDT();
+
+    ClearScreen();
+    SetCursorPos(0); 
+    PrintText("!-----Welcome to sOS-----!\n\r", FG_RED);
+    PrintText(Logo);
     return;
 }

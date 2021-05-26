@@ -3,7 +3,7 @@ PROGRAM_SPACE equ 0x8000    ; declaring constant
 ReadDisk:
     mov ah, 0x02            ; Read sectors from drive
     mov bx, PROGRAM_SPACE   ; define location
-    mov al, 8               ; how many sectors to read
+    mov al, 60              ; how many sectors to read
     mov dl, [BOOT_DISK]     ; drive 
     mov ch, 0x00            ; cylinder
     mov dh, 0x00            ; head
