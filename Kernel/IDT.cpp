@@ -39,7 +39,7 @@ void InitializeIDT(){
 extern "C" void isr1_handler(){
     // signify the pick chip that interrupt is finished
     // PrintText("!-----Welcome to sOS-----!\n\r", FG_RED);
-    PrintText(HexToString(inb(0x60)));
+    // PrintText(HexToString(inb(0x60)));
     outb(0x20, 0x20);
     outb(0xa0, 0x20);
 
