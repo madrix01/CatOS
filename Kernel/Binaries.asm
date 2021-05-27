@@ -7,4 +7,4 @@
     %1_size: dq %1_size - %1
 %endmacro
 
-IncBin Logo, "./Assets/text"
+IncBin Logo, "./Assets/text.txt"

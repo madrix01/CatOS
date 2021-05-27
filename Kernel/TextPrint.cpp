@@ -36,7 +36,7 @@ void ClearScreen(uint_64 ClearColor = BG_BLACK | FG_WHITE){
 
 void PrintText(const char* str, uint_8 color = BG_BLACK | FG_WHITE){
     uint_8 *charPtr = (uint_8*)str;
-    uint_16 index = CursorPosition;
+    uint_32 index = CursorPosition;
 
 
     while(*charPtr != 0){
