@@ -79,3 +79,11 @@ const char* HexToString(T value){
     return hexToStringOutput;
 
 }
+
+
+void PrintChar(char chr, uint_8 color = BG_BLACK | FG_WHITE){
+    *(VGA_MEMORY + CursorPosition*2) = chr;
+    *(VGA_MEMORY + CursorPosition*2 + 1) = color;
+    SetCursorPos(CursorPosition + 1);
+
+}
