@@ -12,6 +12,5 @@ extern "C" void _start() {
     PrintText("\n\r\n\r");
     InitializeIDT();
     MainKeyBoardHandler = KeyboardHandler;
-    PrintText(IntegerToString(-69420));
     return;
 }
