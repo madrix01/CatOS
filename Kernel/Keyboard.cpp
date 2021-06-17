@@ -51,6 +51,12 @@ void KeyboardHandler0xE0(uint_8 scanCode){
             break;
         case 0x48:
             SetCursorPos(CursorPosition - VGA_WIDTH);
+            break;
+        case 0x4B:
+            SetCursorPos(CursorPosition - 1);
+            break;
+        case 0x4D:
+            SetCursorPos(CursorPosition + 1);
             break;   
     }
 }
