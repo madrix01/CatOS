@@ -3,6 +3,7 @@
 #include "TextPrint.cpp"
 #include "IO.cpp"
 #include "kbScanCodeS1.cpp"
+#include "input.h"
 
 struct IDT64{
 	uint_16 offset_low;
@@ -45,7 +46,7 @@ extern "C" void isr1_handler(){
     uint_8 chr = 0;
     if(scanCode < 0x3A){
         chr = KBSet1::ScanCodeLookupTable[scanCode];
-        // PrintChar(KBSet1::ScanCodeLookupTable[scanCode]);
+        key_buffer_append(chr);
     }
     if(MainKeyBoardHandler != 0){
         MainKeyBoardHandler(scanCode, chr);

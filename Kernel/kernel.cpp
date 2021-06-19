@@ -2,6 +2,7 @@
 #include "colorCodes.h"
 #include "IDT.cpp"
 #include "Keyboard.cpp"
+#include "shell.cpp"
 
 extern const char Logo[];
 
@@ -12,5 +13,6 @@ extern "C" void _start() {
     PrintText("\n\r\n\r");
     InitializeIDT();
     MainKeyBoardHandler = KeyboardHandler;
+    BasicShell();
     return;
 }
