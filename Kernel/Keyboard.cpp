@@ -36,7 +36,7 @@ void StandardKeyBoardHandler(uint_8 scanCode, uint_8 chr){
             case 0xB6: // left shif released
                 rightShiftPressed = false;
                 break;
-            case 0x9C: // left shif released
+            case 0x9C: // enter
                 PrintText("\n\r");
                 break;
         }

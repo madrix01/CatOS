@@ -34,8 +34,7 @@ extern int input_read(char* buf, int size){
         while(char_read < size){
             char c = read_key_buffer(true);
             if(c == 0)
-                return char_read;
-            
+                return char_read;            
             *buf = c;
             buf++;
             char_read++;
@@ -61,4 +60,28 @@ extern void key_buffer_append(char c){
     key_buffer.buf[key_buffer.w] = c;
     key_buffer.w = (key_buffer.w + 1) % BUFFER_SIZE;
     return; 
+}
+
+extern int require_input(enum input option){
+    switch (option){
+        case INPUT_SERIAL:
+            if (required_satisfied.serial) return 1;
+            required_satisfied.serial = 1;
+            return 1;
+        
+        case INPUT_KEYBOARD:
+            required_satisfied.keyboard = 1;
+            return 1;
+        
+        case INPUT_BOTH:
+            if(!required_satisfied.serial){
+                required_satisfied.serial = 1;
+            }
+            if(!required_satisfied.keyboard){
+                required_satisfied.keyboard = 1;
+            }
+            return 1;
+        default:
+            return 0;
+    }
 }
