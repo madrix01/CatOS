@@ -33,11 +33,18 @@ extern int input_read(char* buf, int size){
         int char_read = 0;
         while(char_read < size){
             char c = read_key_buffer(true);
-            if(c == 0)
-                return char_read;            
-            *buf = c;
-            buf++;
-            char_read++;
+            // PrintText(IntegerToString((int)c));
+            if((int)c != 8){
+                *buf = c;
+                buf++;
+                char_read++;
+            }else{
+                --buf;
+                --char_read;
+            }
+            if(c == 0){
+                return char_read;
+            }
         }
     }else{
         return 0;
@@ -52,6 +59,7 @@ extern void key_buffer_append(char c){
         key_buffer.w = 0;
         key_buffer.r = 0;
     }
+    // PrintChar(c);
     if(c == '\b'){
         --key_buffer.w;
         --key_buffer.r;

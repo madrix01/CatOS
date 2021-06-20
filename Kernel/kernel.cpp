@@ -4,6 +4,7 @@
 #include "Keyboard.cpp"
 #include "shell.cpp"
 #include "input.h"
+#include "shellkb.cpp"
 
 extern const char Logo[];
 
