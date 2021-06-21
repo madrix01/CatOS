@@ -3,16 +3,17 @@
 #include "input.cpp"
 #include "IDT.cpp"
 #include "shellkb.cpp"
+#include "stdlib.cpp"
 
 void print_prompt(){
-	char buf[3] = {0};
+	char buf[128];
 	PrintText("> ", FG_LGRN);
-	input_read(buf, 3);
+	int buf_size = input_read(buf, 128);
 	PrintText("\n\r");
-	if(buf == "ls "){
-		PrintText("Here are you files");
-	}
+	PrintText(IntegerToString(buf_size));
+	PrintText(buf);
 	PrintText("\n\r");
+	memset(buf, 0, buf_size);
 }
 
 
