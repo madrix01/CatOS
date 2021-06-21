@@ -12,6 +12,9 @@ void print_prompt(){
 	PrintText("\n\r");
 	PrintText(IntegerToString(buf_size));
 	PrintText(buf);
+	if(memcmp(buf, "hello", 5) == 0){
+		PrintText("Hello World\n");
+	}
 	PrintText("\n\r");
 	memset(buf, 0, buf_size);
 }
