@@ -30,22 +30,25 @@ extern char read_key_buffer(bool blocking){
 
 extern int input_read(char* buf, int size){
     if(required_satisfied.keyboard || required_satisfied.serial){
-        int char_read = 0;
+        int char_read = 0; 
         while(char_read < size){
             char c = read_key_buffer(true);
-            // PrintText(IntegerToString((int)c));
-            if((int)c != 8){
+            if(c == '\b'){
+                --buf;
+                --char_read;
+            }else if(c == '\n'){
+                return char_read;
+            }
+            else{
                 *buf = c;
                 buf++;
                 char_read++;
-            }else{
-                --buf;
-                --char_read;
             }
             if(c == 0){
                 return char_read;
             }
         }
+        return char_read;
     }else{
         return 0;
     }

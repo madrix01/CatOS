@@ -11,7 +11,8 @@ void ShellKeyBoardHandler(uint_8 scanCode, uint_8 chr){
             PrintChar(' ');
             SetCursorPos(CursorPosition - 1);
             break;
-        
+        case '\n':
+            break;
         default:
             PrintChar(chr);
             break;
