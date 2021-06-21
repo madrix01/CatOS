@@ -2,9 +2,9 @@
 #include "colorCodes.h"
 #include "IDT.cpp"
 #include "Keyboard.cpp"
-#include "shell.cpp"
+#include "./Shell/shell.cpp"
 #include "input.h"
-#include "shellkb.cpp"
+#include "./Shell/shellkb.cpp"
 
 extern const char Logo[];
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "TypeDef.cpp"
+#include "../TypeDef.cpp"
 
 void* memset(void* bufptr, uint_8 value, int size){
     unsigned char* buf = (unsigned char*)bufptr;
