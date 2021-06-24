@@ -7,6 +7,7 @@
 #define VGA_WIDTH 80
 
 uint_16 CursorPosition;
+uint_8 xPos = 0, yPos = 0;
 
 void SetCursorPos(uint_16 position){
     outb(0x3D4, 0x0F);
@@ -120,4 +121,14 @@ void PrintChar(char chr, uint_8 color = BG_BLACK | FG_WHITE){
     *(VGA_MEMORY + CursorPosition*2 + 1) = color;
     SetCursorPos(CursorPosition + 1);
 
+}
+
+
+
+static inline uint_16 vga_entry(unsigned char uc, uint_8 color){
+    return (uint_16) uc | (uint_16) color << 8;
+}
+
+static void scroll(void){
+    uint_16 blank = ' ';
 }
