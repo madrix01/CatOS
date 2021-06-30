@@ -1,3 +1,4 @@
+#pragma once
 #include "TypeDef.cpp"
 #include "input.h"
 #define BUFFER_SIZE 2000

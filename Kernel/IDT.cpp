@@ -1,9 +1,9 @@
 #pragma once
 #include "TypeDef.cpp"
-#include "TextPrint.cpp"
+// #include "TextPrint.cpp"
 #include "IO.cpp"
 #include "kbScanCodeS1.cpp"
-#include "input.h"
+#include "./input.h"
 
 struct IDT64{
 	uint_16 offset_low;
@@ -40,7 +40,6 @@ void InitializeIDT(){
 
 
 void (*MainKeyBoardHandler)(uint_8 scanCode, uint_8 chr);
-
 extern "C" void isr1_handler(){
     uint_8 scanCode = inb(0x60);
     uint_8 chr = 0;
