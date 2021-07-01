@@ -1,4 +1,4 @@
-#include "./input.cpp"
+#include "input.h"
 #include "./drivers/console.cpp"
 #include "colorCodes.h"
 #include "IDT.cpp"

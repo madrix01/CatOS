@@ -131,3 +131,36 @@ static void update_cursor(int x, int y){
 	outb(0x3D4, 0x0E);
 	outb(0x3D5, (uint_8) ((pos >> 8) & 0xFF));
 }
+
+char integerToStringOut[128];
+template<typename T>
+const char* IntegerToString(T value){
+    uint_8 isNegative = 0;
+
+    if(value < 0){
+        isNegative = true;
+        value *= -1;
+        integerToStringOut[0] = '-';
+    }
+
+    uint_8 size = 0;
+    uint_64 sizeTester = (uint_64)value;
+    while(sizeTester/10 > 0){
+        sizeTester /= 10;
+        size++;
+    }
+
+    uint_8 index = 0;
+    uint_64 newVal = (uint_64)value;
+    while(newVal/10 > 0){
+        uint_8 remainder = newVal%10;
+        newVal /= 10;
+        integerToStringOut[isNegative + size - index] = remainder + 48;
+        index++;
+    }
+
+    uint_8 remainder = newVal%10;
+    integerToStringOut[isNegative + size - index] = remainder + 48;
+    integerToStringOut[isNegative + size + 1] = 0;
+    return integerToStringOut;
+}

@@ -6,8 +6,7 @@ enum input {
     INPUT_BOTH
 };
 
-extern int require_input(enum input option);
-extern int input_read(char *,int);
-extern void key_buffer_append(char c);
-extern char read_key_buffer(bool);
-extern char* testString;
+extern "C" int require_input(enum input option);
+extern "C" int input_read(char *,int);
+extern "C" void key_buffer_append(char c);
+extern "C" char read_key_buffer(bool);
