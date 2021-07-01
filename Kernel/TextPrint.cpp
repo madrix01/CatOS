@@ -9,7 +9,7 @@
 uint_16 CursorPosition;
 uint_8 xPos = 0, yPos = 0;
 
-void SetCursorPos(uint_16 position){
+void SetCursorPos(uint_16 position){ 
     outb(0x3D4, 0x0F);
     outb(0x3D5, (uint_8)(position & 0xFF));
     outb(0x3D4,  0x0E);
@@ -39,7 +39,6 @@ void PrintText(const char* str, uint_8 color = BG_BLACK | FG_WHITE){
     uint_8 *charPtr = (uint_8*)str;
     uint_32 index = CursorPosition;
 
-
     while(*charPtr != 0){
         switch (*charPtr){
         case 10:    
@@ -48,7 +47,8 @@ void PrintText(const char* str, uint_8 color = BG_BLACK | FG_WHITE){
         case 13:
             index -= index%VGA_WIDTH;
             break;
-        default:    
+        default:
+            
             *(VGA_MEMORY + index * 2) = *charPtr;
             *(VGA_MEMORY + index * 2 + 1) = color;
             index++;
@@ -120,15 +120,4 @@ void PrintChar(char chr, uint_8 color = BG_BLACK | FG_WHITE){
     *(VGA_MEMORY + CursorPosition*2) = chr;
     *(VGA_MEMORY + CursorPosition*2 + 1) = color;
     SetCursorPos(CursorPosition + 1);
-
-}
-
-
-
-static inline uint_16 vga_entry(unsigned char uc, uint_8 color){
-    return (uint_16) uc | (uint_16) color << 8;
-}
-
-static void scroll(void){
-    uint_16 blank = ' ';
 }

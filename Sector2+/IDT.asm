@@ -25,7 +25,6 @@ idtDescriptor:
     %endmacro    
 
 [extern isr1_handler]
-
 isr1:           ;interrupt service return 1
     PUSHALL
     call isr1_handler

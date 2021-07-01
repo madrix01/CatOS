@@ -45,6 +45,7 @@ StartProtectedMode:
 [extern _start]
 
 %include "./Sector2+/IDT.asm"
+%include "./Sector2+/ShutDown.asm"
 
 Start64Bit:
     mov edi, 0xb8000
