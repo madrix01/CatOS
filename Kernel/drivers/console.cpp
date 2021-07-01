@@ -78,7 +78,7 @@ static void putchar(char c, uint_8 color, uint_32 x, uint_32 y){
 	terminal_buffer[index] = vga_entry(c, color);
 }
 
-void putch(char c){
+void putch(char c, uint_8 color = VGA_COLOR_WHITE){
 	if(c == '\n'){
 		terminal_row++;
 		terminal_column = 0;
@@ -96,17 +96,17 @@ void putch(char c){
 	}else if(c == '\r'){
 		terminal_column = 0;
 	}else{
-		putchar(c, terminal_color, terminal_column, terminal_row);
+		putchar(c, color, terminal_column, terminal_row);
 		++terminal_column;
 	}
 	scroll();
 	update_cursor(terminal_column, terminal_row);
 }
 
-static void write(const char* s){
-	uint_32 index;
+static void write(const char* s, uint_8 color = VGA_COLOR_WHITE){
+	uint_32 index = 0;
 	while(s[index] != 0){
-		putch(s[index]);
+		putch(s[index], color);
 		index++;	
 	}
 }

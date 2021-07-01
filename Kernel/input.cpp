@@ -3,6 +3,8 @@
 #include "input.h"
 #define BUFFER_SIZE 2000
 
+// char* testString = "Hello this is input";
+
 struct circular_buffer{
     char buf[BUFFER_SIZE];
     uint_32 r;
@@ -15,7 +17,8 @@ static struct{
 } required_satisfied;
 
 
-extern char read_key_buffer(bool blocking){
+// extern "C" 
+char read_key_buffer(bool blocking){
     char c;
     if(blocking){
         while(key_buffer.w == key_buffer.r){
@@ -29,7 +32,8 @@ extern char read_key_buffer(bool blocking){
     return c;
 }
 
-extern int input_read(char* buf, int size){
+// extern "C"
+int input_read(char* buf, int size){
     if(required_satisfied.keyboard || required_satisfied.serial){
         int char_read = 0; 
         while(char_read < size){
@@ -56,7 +60,8 @@ extern int input_read(char* buf, int size){
     return 0;
 }
 
-extern void key_buffer_append(char c){
+// extern 
+void key_buffer_append(char c){
     if(c == 0) return;
 
     if(key_buffer.w == (key_buffer.r + BUFFER_SIZE - 1) % BUFFER_SIZE){
@@ -74,7 +79,8 @@ extern void key_buffer_append(char c){
     return; 
 }
 
-extern int require_input(enum input option){
+// extern "C"
+int require_input(enum input option){
     switch (option){
         case INPUT_SERIAL:
             if (required_satisfied.serial) return 1;
