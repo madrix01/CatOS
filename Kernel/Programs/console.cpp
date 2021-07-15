@@ -13,6 +13,8 @@ void programRun(void* bufPtr, int buf_size){
         shutdown();
     }else if(memcmp(bufPtr, "whoami", 6) == 0){
         write("CatOS v0.0.1 (alpha)", FG_LBLUE);
+    }else if(memcmp(bufPtr, "clear", 5) == 0){
+        ClearScreen();
     }else{
         write("[CatOS] Command not found", 0x0C);
     }

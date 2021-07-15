@@ -2,6 +2,7 @@
 #include "../TypeDef.cpp"
 #include "../libs/stdlib.cpp"
 #include "../IO.cpp"
+#include "../colorCodes.h"
 
 static const uint_32 vgaWIDTH = 80;
 static const uint_32 VGA_HEIGHT = 25;
@@ -163,4 +164,16 @@ const char* IntegerToString(T value){
     integerToStringOut[isNegative + size - index] = remainder + 48;
     integerToStringOut[isNegative + size + 1] = 0;
     return integerToStringOut;
+}
+
+void ClearScreen(uint_64 ClearColor = BG_BLACK | FG_WHITE){
+	uint_16 blank = vga_entry(' ', terminal_color);
+	int i;
+
+	for(i = 0*80; i < 25*80; i++){
+		terminal_buffer[i] = blank;
+	}
+	terminal_column = 0;
+	terminal_row = 0;
+	update_cursor(terminal_column, terminal_row);
 }
