@@ -1,8 +1,8 @@
 #pragma once
-#include "../TypeDef.cpp"
+#include <TypeDef.h>
 #include "../libs/stdlib.cpp"
 #include "../IO.cpp"
-#include "../colorCodes.h"
+#include <colorCodes.h>
 
 static const uint_32 vgaWIDTH = 80;
 static const uint_32 VGA_HEIGHT = 25;
@@ -38,7 +38,7 @@ enum colors {
 };
 
 
-static inline uint_8 vga_entry_color(enum colors fg, enum colors bg){
+static inline uint_8 vga_entry_color(uint_8 fg, uint_8 bg){
 	return (fg | bg << 4);
 }
 
@@ -63,7 +63,7 @@ static void scroll(void){
 void console_required(){
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	terminal_color = vga_entry_color(FG_LGRY, BG_BLACK);
 	terminal_buffer = (uint_16*)0xb8000;
 	init_cursor();
 	for(uint_32 y = 0; y < VGA_HEIGHT; y++){

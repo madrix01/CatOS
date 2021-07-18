@@ -1,9 +1,9 @@
 #pragma once
-#include "../TypeDef.cpp"
+#include <TypeDef.h>
 #include "../drivers/console.cpp"
 
 
-int StrLen(const void* aptr){
+extern "C" int StrLen(const void* aptr){
     const uint_8 *a = (const uint_8*) aptr;
     int i = 0;
     while(a[i] != '\0')

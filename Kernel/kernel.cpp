@@ -1,9 +1,11 @@
-#include "input.h"
-#include "./drivers/console.cpp"
-#include "colorCodes.h"
+// #include <idt.h>
+#include <drivers/console.h>
+#include <colorCodes.h>
+#include "input.cpp"
 #include "IDT.cpp"
 #include "Keyboard.cpp"
 #include "./Shell/shell.cpp"
+#include "MemoryMap.cpp"
 
 extern const char Logo[];
 

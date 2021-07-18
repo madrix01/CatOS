@@ -1,9 +1,8 @@
 #pragma once
-#include "TypeDef.cpp"
-// #include "TextPrint.cpp"
+#include <TypeDef.h>
 #include "IO.cpp"
 #include "kbScanCodeS1.cpp"
-#include "input.h"
+#include "input.cpp"
 
 struct IDT64{
 	uint_16 offset_low;

@@ -3,9 +3,11 @@ jmp EnterProtectedMode
 
 %include "./Sector2+/gdt.asm"
 %include "./Sector1/print.asm"
+%include "./Sector2+/DetectMemory.asm"
 
 
 EnterProtectedMode:
+    call DetectMemory
     call EnableA20                  ; so that all memory can be accessed
     cli                             ; disables interrupts
     lgdt [gdt_descriptor]           ; loading gdt
@@ -15,8 +17,8 @@ EnterProtectedMode:
     jmp codeseg:StartProtectedMode
 
 EnableA20:
-    in al, 0x92
-    or al, 2
+    in  al, 0x92
+    or  al, 2
     out 0x92, al
     ret
 
@@ -32,8 +34,6 @@ StartProtectedMode:
     mov es, ax
     mov fs, ax
     mov gs, ax
-
-    mov [0xb8000], byte 'H'
 
     call DetectCpuId
     call DetectLongMode

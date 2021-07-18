@@ -1,7 +1,7 @@
 #pragma once
 #include "./IO.cpp"
-#include "TypeDef.cpp"
-#include "colorCodes.h"
+#include <TypeDef.h>
+#include <colorCodes.h>
 
 #define VGA_MEMORY (uint_8*)0xb8000
 #define VGA_WIDTH 80
@@ -81,38 +81,38 @@ const char* HexToString(T value){
 
 }
 
-char integerToStringOut[128];
-template<typename T>
-const char* IntegerToString(T value){
-    uint_8 isNegative = 0;
+// char integerToStringOut[128];
+// template<typename T>
+// const char* IntegerToString(T value){
+//     uint_8 isNegative = 0;
 
-    if(value < 0){
-        isNegative = true;
-        value *= -1;
-        integerToStringOut[0] = '-';
-    }
+//     if(value < 0){
+//         isNegative = true;
+//         value *= -1;
+//         integerToStringOut[0] = '-';
+//     }
 
-    uint_8 size = 0;
-    uint_64 sizeTester = (uint_64)value;
-    while(sizeTester/10 > 0){
-        sizeTester /= 10;
-        size++;
-    }
+//     uint_8 size = 0;
+//     uint_64 sizeTester = (uint_64)value;
+//     while(sizeTester/10 > 0){
+//         sizeTester /= 10;
+//         size++;
+//     }
 
-    uint_8 index = 0;
-    uint_64 newVal = (uint_64)value;
-    while(newVal/10 > 0){
-        uint_8 remainder = newVal%10;
-        newVal /= 10;
-        integerToStringOut[isNegative + size - index] = remainder + 48;
-        index++;
-    }
+//     uint_8 index = 0;
+//     uint_64 newVal = (uint_64)value;
+//     while(newVal/10 > 0){
+//         uint_8 remainder = newVal%10;
+//         newVal /= 10;
+//         integerToStringOut[isNegative + size - index] = remainder + 48;
+//         index++;
+//     }
 
-    uint_8 remainder = newVal%10;
-    integerToStringOut[isNegative + size - index] = remainder + 48;
-    integerToStringOut[isNegative + size + 1] = 0;
-    return integerToStringOut;
-}
+//     uint_8 remainder = newVal%10;
+//     integerToStringOut[isNegative + size - index] = remainder + 48;
+//     integerToStringOut[isNegative + size + 1] = 0;
+//     return integerToStringOut;
+// }
 
 
 

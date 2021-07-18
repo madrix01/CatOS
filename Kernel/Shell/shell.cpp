@@ -1,9 +1,7 @@
 #pragma once
-// #include "../TextPrint.cpp"
 #include "../drivers/console.cpp"	
 #include "../input.cpp"
 #include "../IDT.cpp"
-// #include "shellkb.cpp"
 #include "../libs/stdlib.cpp"
 #include "../Programs/console.cpp"
 
