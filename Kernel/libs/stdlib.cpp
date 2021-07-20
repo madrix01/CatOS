@@ -1,7 +1,4 @@
-#pragma once
-#include <TypeDef.h>
-#include "../drivers/console.cpp"
-
+#include <libs/stdlib.h>
 
 extern "C" int StrLen(const void* aptr){
     const uint_8 *a = (const uint_8*) aptr;

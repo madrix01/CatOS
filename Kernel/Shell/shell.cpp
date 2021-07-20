@@ -1,9 +1,4 @@
-#pragma once
-#include "../drivers/console.cpp"	
-#include "../input.cpp"
-#include "../IDT.cpp"
-#include "../libs/stdlib.cpp"
-#include "../Programs/console.cpp"
+#include <Shell/shell.h>
 
 void print_prompt(){
 	char buf[128];

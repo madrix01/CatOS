@@ -1,8 +1,8 @@
 #pragma once 
-#include "../libs/stdlib.cpp"
-#include "../drivers/console.cpp"
+#include <libs/stdlib.h>
+#include <drivers/console.h>
 #include <colorCodes.h>
-#include "../MemoryMap.cpp"
+#include <MemoryMap.h>
 
 extern "C" void shutdown();
 
@@ -17,7 +17,12 @@ void programRun(void* bufPtr, int buf_size){
     }else if(memcmp(bufPtr, "clear", 5) == 0){
         ClearScreen();
     }else if(memcmp(bufPtr, "test", 4) == 0){
-        write(IntegerToString(MemoryRegionCount));
+        MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
+
+        for(uint_8 i = 0; i < UsableMemoryRegionCount; i++){
+            MemoryMapEntry* memMap = usableMemoryMaps[i];
+            PrintMemoryMap(memMap);
+        }
     }else{
         write("[CatOS] Command not found", 0x0C);
     }

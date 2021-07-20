@@ -1,8 +1,4 @@
-#pragma once
-#include <TypeDef.h>
-#include "../libs/stdlib.cpp"
-#include "../IO.cpp"
-#include <colorCodes.h>
+#include <drivers/console.h>
 
 static const uint_32 vgaWIDTH = 80;
 static const uint_32 VGA_HEIGHT = 25;
@@ -18,24 +14,24 @@ static void enable_cursor(void);
 
 static void update_cursor(int x, int y);
 
-enum colors {
-	VGA_COLOR_BLACK = 0,
-	VGA_COLOR_BLUE = 1,
-	VGA_COLOR_GREEN = 2,
-	VGA_COLOR_CYAN = 3,
-	VGA_COLOR_RED = 4,
-	VGA_COLOR_MAGENTA = 5,
-	VGA_COLOR_BROWN = 6,
-	VGA_COLOR_LIGHT_GREY = 7,
-	VGA_COLOR_DARK_GREY = 8,
-	VGA_COLOR_LIGHT_BLUE = 9,
-	VGA_COLOR_LIGHT_GREEN = 10,
-	VGA_COLOR_LIGHT_CYAN = 11,
-	VGA_COLOR_LIGHT_RED = 12,
-	VGA_COLOR_LIGHT_MAGENTA = 13,
-	VGA_COLOR_LIGHT_BROWN = 14,
-	VGA_COLOR_WHITE = 15,
-};
+// enum colors {
+// 	VGA_COLOR_BLACK = 0,
+// 	VGA_COLOR_BLUE = 1,
+// 	VGA_COLOR_GREEN = 2,
+// 	VGA_COLOR_CYAN = 3,
+// 	VGA_COLOR_RED = 4,
+// 	VGA_COLOR_MAGENTA = 5,
+// 	VGA_COLOR_BROWN = 6,
+// 	VGA_COLOR_LIGHT_GREY = 7,
+// 	VGA_COLOR_DARK_GREY = 8,
+// 	VGA_COLOR_LIGHT_BLUE = 9,
+// 	VGA_COLOR_LIGHT_GREEN = 10,
+// 	VGA_COLOR_LIGHT_CYAN = 11,
+// 	VGA_COLOR_LIGHT_RED = 12,
+// 	VGA_COLOR_LIGHT_MAGENTA = 13,
+// 	VGA_COLOR_LIGHT_BROWN = 14,
+// 	VGA_COLOR_WHITE = 15,
+// };
 
 
 static inline uint_8 vga_entry_color(uint_8 fg, uint_8 bg){
@@ -79,7 +75,7 @@ static void putchar(char c, uint_8 color, uint_32 x, uint_32 y){
 	terminal_buffer[index] = vga_entry(c, color);
 }
 
-void putch(char c, uint_8 color = VGA_COLOR_WHITE){
+void putch(char c , uint_8 color){
 	if(c == '\n'){
 		terminal_row++;
 		terminal_column = 0;
@@ -104,7 +100,7 @@ void putch(char c, uint_8 color = VGA_COLOR_WHITE){
 	update_cursor(terminal_column, terminal_row);
 }
 
-static void write(const char* s, uint_8 color = VGA_COLOR_WHITE){
+void write(const char* s, uint_8 color){
 	uint_32 index = 0;
 	while(s[index] != 0){
 		putch(s[index], color);
@@ -133,40 +129,40 @@ static void update_cursor(int x, int y){
 	outb(0x3D5, (uint_8) ((pos >> 8) & 0xFF));
 }
 
-char integerToStringOut[128];
-template<typename T>
-const char* IntegerToString(T value){
-    uint_8 isNegative = 0;
+// char integerToStringOut[128];
+// template<typename T>
+// const char* IntegerToString(T value){
+//     uint_8 isNegative = 0;
 
-    if(value < 0){
-        isNegative = true;
-        value *= -1;
-        integerToStringOut[0] = '-';
-    }
+//     if(value < 0){
+//         isNegative = true;
+//         value *= -1;
+//         integerToStringOut[0] = '-';
+//     }
 
-    uint_8 size = 0;
-    uint_64 sizeTester = (uint_64)value;
-    while(sizeTester/10 > 0){
-        sizeTester /= 10;
-        size++;
-    }
+//     uint_8 size = 0;
+//     uint_64 sizeTester = (uint_64)value;
+//     while(sizeTester/10 > 0){
+//         sizeTester /= 10;
+//         size++;
+//     }
 
-    uint_8 index = 0;
-    uint_64 newVal = (uint_64)value;
-    while(newVal/10 > 0){
-        uint_8 remainder = newVal%10;
-        newVal /= 10;
-        integerToStringOut[isNegative + size - index] = remainder + 48;
-        index++;
-    }
+//     uint_8 index = 0;
+//     uint_64 newVal = (uint_64)value;
+//     while(newVal/10 > 0){
+//         uint_8 remainder = newVal%10;
+//         newVal /= 10;
+//         integerToStringOut[isNegative + size - index] = remainder + 48;
+//         index++;
+//     }
 
-    uint_8 remainder = newVal%10;
-    integerToStringOut[isNegative + size - index] = remainder + 48;
-    integerToStringOut[isNegative + size + 1] = 0;
-    return integerToStringOut;
-}
+//     uint_8 remainder = newVal%10;
+//     integerToStringOut[isNegative + size - index] = remainder + 48;
+//     integerToStringOut[isNegative + size + 1] = 0;
+//     return integerToStringOut;
+// }
 
-void ClearScreen(uint_64 ClearColor = BG_BLACK | FG_WHITE){
+void ClearScreen(uint_64 ClearColor){
 	uint_16 blank = vga_entry(' ', terminal_color);
 	int i;
 

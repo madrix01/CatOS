@@ -1,5 +1,8 @@
 #pragma once
 #include <TypeDef.h>
+#include <IO.h>
+#include <kbScanCodeS1.h>
+#include <input.h>
 
 struct IDT64{
 	uint_16 offset_low;
@@ -11,9 +14,6 @@ struct IDT64{
 	uint_32 zero;
 };
 
-extern IDT64 _idt[256];
-extern uint_64 isr1;
-extern "C" void LoadIDT();
-extern "C" void InitializeIDT();
+
 void (*MainKeyBoardHandler)(uint_8 scanCode, uint_8 chr);
-// extern "C" void isr1_handler();
+void InitializeIDT();

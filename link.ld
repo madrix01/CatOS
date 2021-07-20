@@ -6,6 +6,14 @@ INPUT
 (
     ./bin/extendedProg.o
     ./bin/kernel.o
+    ./bin/IO.o
+    ./bin/Keyboard.o
+    ./bin/MemoryMap.o
+    ./bin/input.o
+    ./bin/IDT.o
+    ./bin/console.o
+    ./bin/stdlib.o
+    ./bin/shell.o
     ./bin/Binaries.o
 )
 

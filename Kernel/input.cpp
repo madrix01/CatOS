@@ -1,21 +1,4 @@
-#pragma once
-#include <TypeDef.h>
-#include "input.h"
-#define BUFFER_SIZE 2000
-
-// char* testString = "Hello this is input";
-
-struct circular_buffer{
-    char buf[BUFFER_SIZE];
-    uint_32 r;
-    uint_32 w;
-} key_buffer;
-
-static struct{
-    uint_8 serial;
-    uint_8 keyboard;
-} required_satisfied;
-
+#include <input.h>
 
 // extern "C" 
 char read_key_buffer(bool blocking){

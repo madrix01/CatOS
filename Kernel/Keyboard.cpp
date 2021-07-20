@@ -1,11 +1,7 @@
-#pragma once
-#include <TypeDef.h>
-#include "./drivers/console.cpp"
-//  #include "TextPrint.cpp"
+#include <Keyboard.h>
 
-
-bool leftShiftPressed = false, rightShiftPressed = false;
-uint_8 LastScanCode;
+bool leftShiftPressed = false;
+bool rightShiftPressed = false;
 
 void StandardKeyBoardHandler(uint_8 scanCode, uint_8 chr){
     if(chr != 0){
