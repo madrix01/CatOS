@@ -1,5 +1,7 @@
 #include <input.h>
 
+
+circular_buffer key_buffer;
 // extern "C" 
 char read_key_buffer(bool blocking){
     char c;
@@ -51,7 +53,6 @@ void key_buffer_append(char c){
         key_buffer.w = 0;
         key_buffer.r = 0;
     }
-    // PrintChar(c);
     if(c == '\b'){
         --key_buffer.w;
         --key_buffer.r;

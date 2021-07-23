@@ -8,9 +8,10 @@ struct MemoryMapEntry{
     uint_32 RegionType;
     uint_32 ExtendedAttribute;
 };
-extern uint_8 MemoryRegionCount;
-uint_8 UsableMemoryRegionCount;
+
+extern "C" uint_8 MemoryRegionCount;
+// uint_8 UsableMemoryRegionCount;
 
 void PrintMemoryMap(MemoryMapEntry* memoryMap);
-MemoryMapEntry* UsableMemoryRegions[10];
+// MemoryMapEntry* UsableMemoryRegions[10];
 MemoryMapEntry** GetUsableMemoryRegions();

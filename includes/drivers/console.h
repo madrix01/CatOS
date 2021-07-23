@@ -16,7 +16,7 @@ extern void putch(char c, uint_8 color = FG_WHITE);
 extern void write(const char* s, uint_8 color = FG_WHITE);
 void ClearScreen(uint_64 ClearColor = BG_BLACK | FG_WHITE);
 
-extern char integerToStringOut[128];
+static char integerToStringOut[128];
 template<typename T>
 const char* IntegerToString(T value){
     uint_8 isNegative = 0;

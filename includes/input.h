@@ -6,7 +6,7 @@ struct circular_buffer{
     char buf[BUFFER_SIZE];
     uint_32 r;
     uint_32 w;
-} key_buffer;
+};
 
 static struct{
     uint_8 serial;

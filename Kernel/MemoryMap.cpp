@@ -1,15 +1,5 @@
 #include <MemoryMap.h>
 
-// struct MemoryMapEntry{
-//     uint_64 BaseAddr;
-//     uint_64 RegionLength;
-//     uint_32 RegionType;
-//     uint_32 ExtendedAttribute;
-// };
-
-// extern uint_8 MemoryRegionCount;
-// uint_8 UsableMemoryRegionCount;
-
 void PrintMemoryMap(MemoryMapEntry* memoryMap){
     write("Memory Base : ");
     write(IntegerToString(memoryMap->BaseAddr));
@@ -22,8 +12,8 @@ void PrintMemoryMap(MemoryMapEntry* memoryMap){
     write("\n\r --------- \n\r");
 }
 
-// MemoryMapEntry* UsableMemoryRegions[10];
-
+MemoryMapEntry* UsableMemoryRegions[10];
+uint_8 UsableMemoryRegionCount;
 
 bool MemoryRegionsGot = false;
 MemoryMapEntry** GetUsableMemoryRegions(){

@@ -6,7 +6,7 @@
 
 extern "C" void shutdown();
 
-void programRun(void* bufPtr, int buf_size){
+extern void programRun(void* bufPtr, int buf_size){
     if(memcmp(bufPtr, "hello", 5) == 0){
         write("Hello there !!!");
     }else if(memcmp(bufPtr, "exit", 4) == 0){
