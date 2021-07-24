@@ -15,6 +15,7 @@ INPUT
     ./bin/stdlib.o
     ./bin/shell.o
     ./bin/Binaries.o
+    ./bin/heap.o
 )
 
 OUTPUT

@@ -1,21 +1,33 @@
 .SILENT : start
 
+GCC = x86_64-elf-gcc
+LINKER = x86_64-elf-ld
+QEMU = qemu-system-x86_64
+CFLAGS = -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c
+BUILDDIR = ./bin
+KDIR = ./Kernel
+S1DIR = ./Sector1
+S2DIR = ./Sector2+
+
+
 start:
 	rm -R ./bin
 	mkdir bin
-	nasm -f bin ./Sector1/boot.asm -o ./bin/boot.bin
-	nasm -f elf64 ./Sector2+/extendedProg.asm -o ./bin/extendedProg.o
-	nasm -f elf64 ./Kernel/Binaries.asm -o ./bin/Binaries.o
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/kernel.cpp" -o "./bin/kernel.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/IDT.cpp" -o "./bin/IDT.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/IO.cpp" -o "./bin/IO.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/Keyboard.cpp" -o "./bin/Keyboard.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/MemoryMap.cpp" -o "./bin/MemoryMap.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/input.cpp" -o "./bin/input.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/drivers/console.cpp" -o "./bin/console.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/libs/stdlib.cpp" -o "./bin/stdlib.o"
-	x86_64-elf-gcc -Ttext 0x8000 -ffreestanding -mno-red-zone -I ./includes -m64 -c "./Kernel/Shell/shell.cpp" -o "./bin/shell.o"
+	nasm -f bin ${S1DIR}/boot.asm -o ${BUILDDIR}/boot.bin
+	nasm -f elf64 ${S2DIR}/extendedProg.asm -o ./bin/extendedProg.o
+	nasm -f elf64 ${KDIR}/Binaries.asm -o ./bin/Binaries.o
+	
+	${GCC} ${CFLAGS} "${KDIR}/kernel.cpp" -o "${BUILDDIR}/kernel.o"
+	${GCC} ${CFLAGS} "${KDIR}/IDT.cpp" -o "${BUILDDIR}/IDT.o"
+	${GCC} ${CFLAGS} "${KDIR}/IO.cpp" -o "${BUILDDIR}/IO.o"
+	${GCC} ${CFLAGS} "${KDIR}/Keyboard.cpp" -o "${BUILDDIR}/Keyboard.o"
+	${GCC} ${CFLAGS} "${KDIR}/MemoryMap.cpp" -o "${BUILDDIR}/MemoryMap.o"
+	${GCC} ${CFLAGS} "${KDIR}/input.cpp" -o "${BUILDDIR}/input.o"
+	${GCC} ${CFLAGS} "${KDIR}/drivers/console.cpp" -o "${BUILDDIR}/console.o"
+	${GCC} ${CFLAGS} "${KDIR}/libs/stdlib.cpp" -o "${BUILDDIR}/stdlib.o"
+	${GCC} ${CFLAGS} "${KDIR}/Shell/shell.cpp" -o "${BUILDDIR}/shell.o"
+	${GCC} ${CFLAGS} "${KDIR}/mem/heap.cpp" -o "${BUILDDIR}/heap.o"
 
-	x86_64-elf-ld -T"link.ld"
-	cat ./bin/boot.bin ./bin/kernel.bin >> ./bin/CatOS.bin
-	qemu-system-x86_64 -fda  ./bin/CatOS.bin
+	${LINKER} -T"link.ld"
+	cat ${BUILDDIR}/boot.bin ${BUILDDIR}/kernel.bin >> ${BUILDDIR}/CatOS.bin
+	${QEMU} -fda  ${BUILDDIR}/CatOS.bin

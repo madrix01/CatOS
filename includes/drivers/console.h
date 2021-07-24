@@ -48,3 +48,23 @@ const char* IntegerToString(T value){
     integerToStringOut[isNegative + size + 1] = 0;
     return integerToStringOut;
 }
+
+static char hexToStringOutput[128];
+template<typename T>
+const char* HexToString(T value){
+    T* valPtr = &value;
+    uint_8* ptr;
+    uint_8 temp;
+    uint_8 size = (sizeof(T))*2 -1;
+    uint_8 i = 0;
+
+    for(i = 0; i < size; i++){
+        ptr = ((uint_8*)valPtr + i);
+        temp = ((*ptr & 0xF0) >> 4);
+        hexToStringOutput[size - (i * 2 + 1)] = temp + (temp > 9 ? 55 : 48);
+        temp = ((*ptr & 0x0F));
+        hexToStringOutput[size - (i * 2 + 0)] = temp + (temp > 9 ? 55 : 48); 
+    }
+    hexToStringOutput[size+1] = 0;
+    return hexToStringOutput;
+}
