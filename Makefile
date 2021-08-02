@@ -27,7 +27,7 @@ start:
 	${GCC} ${CFLAGS} "${KDIR}/libs/stdlib.cpp" -o "${BUILDDIR}/stdlib.o"
 	${GCC} ${CFLAGS} "${KDIR}/Shell/shell.cpp" -o "${BUILDDIR}/shell.o"
 	${GCC} ${CFLAGS} "${KDIR}/mem/heap.cpp" -o "${BUILDDIR}/heap.o"
-
+	# ${GCC} ${CFLAGS} "${KDIR}/Programs/run.cpp" -o "${BUILDDIR}/run.o"
 	${LINKER} -T"link.ld"
 	cat ${BUILDDIR}/boot.bin ${BUILDDIR}/kernel.bin >> ${BUILDDIR}/CatOS.bin
 	${QEMU} -fda  ${BUILDDIR}/CatOS.bin

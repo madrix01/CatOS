@@ -18,9 +18,16 @@ extern "C" void _start() {
     require_input(INPUT_BOTH);
     MainKeyBoardHandler = StandardKeyBoardHandler;
     InitializeHeap(0x100000, 0x100000);
-    void* TestMemoryAddress = malloc(64);
+    void* TestMemoryAddress = malloc(0x10);
+	void* TestMemoryAddress2 = malloc(0x1);
+	void* TestMemoryAddress3 = malloc(0x10);
     write(HexToString((uint_64)TestMemoryAddress));
-    while(true)
+   	write("\n\r");
+	write(HexToString((uint_64)TestMemoryAddress2));
+ 	write("\n\r");
+	write(HexToString((uint_64)TestMemoryAddress3));
+	write("\n\r");
+	while(true)
         BasicShell();
     return;
 }
